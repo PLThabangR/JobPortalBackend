@@ -37,6 +37,11 @@ const userSchema =new mongoose.Schema({
      this.password =await bcrypt.hash(this.password,salt)
      console.log("hashed Password",this.password)
   })
+  //Compare password
+  userSchema.methods.comparePassword = async function(userPassword){
+    const isMatch =await bcrypt.compare(userPassword,this.password);
+    return isMatch;
+  }
   //Json web Token
   userSchema.methods.createJWT = function(){
     return JWT.sign({userId:this._id}, process.env.JWT_SECRET,{expiresIn:'1d'})
