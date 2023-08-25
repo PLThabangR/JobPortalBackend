@@ -17,7 +17,8 @@ const userSchema =new mongoose.Schema({
     },
     password:{
         type:String,
-        required:[true,"password is required"]
+        required:[true,"password is required"],
+        minlength:[6,"Password length should be greater than 6 characters"]
     },
     location:{
         type:String,
@@ -30,5 +31,10 @@ const userSchema =new mongoose.Schema({
 )
  const userModel=mongoose.model('User',userSchema);
 
- 
+ //Middleware to encrypt the password
+ userSchema.pre("save", async function(){
+
+   const salt = await bcrypt.genSalt(10);
+    this.password =await bcrypt.hash(this.password,salt)
+ })
  export default userModel;
