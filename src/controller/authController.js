@@ -1,9 +1,10 @@
 import express from 'express'
 import userModel from '../model/userModel.js';
-import bcrypt from 'bcrypt'
+
 
 export const registerControler = async (req,res,next)=>{
 
+   try{
     const {name,email,password } = req.body;
 
     //Validate
@@ -23,17 +24,28 @@ export const registerControler = async (req,res,next)=>{
      if(existingUser){
          next("Email Already taken please login")
     }
-   // this.password = await bcrypt.hash(this.password,10)
+   
     //Save the user to the DB
     const user = await userModel.create({name,email,password});
+    //Token
+    const token = user.createJWT()
     res.status(201).send({
         success:true,
         message:'User created successfully',
-        user
+        user:{
+         name:user.name,
+         lastName:user.lastName,
+         email:user.email,
+         location:user.location
+        },
+        token
     })
 
-
-   next(error)
+   }catch(error){
+      next(error)
+   }
+   
+    
 
 
 
