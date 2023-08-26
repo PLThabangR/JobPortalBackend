@@ -9,6 +9,7 @@ import cors from 'cors';
 import morgan from 'morgan'
 import { authRoutes } from "./routes/authRoutes.js";
 import errorMidddleware from "./middlewares/errorMiddlewares.js";
+import { userRoutes } from "./routes/userRoutes.js";
 //rest object
 const app =express();
 
@@ -23,6 +24,7 @@ app.use(morgan( 'dev '))
 //routes
 app.use('/api',testRoutes)
 app.use('/auth',authRoutes)
+app.use('/auth/user',userRoutes)
 //port
 const PORT = process.env.PORT || 5000;
 //validation middleware

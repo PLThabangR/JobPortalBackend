@@ -32,7 +32,8 @@ const userSchema =new mongoose.Schema({
 );
  //Middleware to encrypt the password
  userSchema.pre("save", async function(){
-    
+    //do not run this logic if is modified
+    if(!this.isModified) return
     const salt = await bcrypt.genSalt(10);
      this.password =await bcrypt.hash(this.password,salt)
      console.log("hashed Password",this.password)
