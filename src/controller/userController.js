@@ -1,6 +1,6 @@
 import userModel from '../model/userModel.js';
 
-
+//Update user details
 export const updateUserController = async(req,res,next) => {
 
 const { name,email,lastName,location}= req.body
