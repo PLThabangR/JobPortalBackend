@@ -1,7 +1,7 @@
 import express from 'express'
 import userModel from '../model/userModel.js';
 
-
+//==============Register a new User
 export const registerControler = async (req,res,next)=>{
 
    try{

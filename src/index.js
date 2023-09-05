@@ -10,6 +10,7 @@ import morgan from 'morgan'
 import { authRoutes } from "./routes/authRoutes.js";
 import errorMidddleware from "./middlewares/errorMiddlewares.js";
 import { userRoutes } from "./routes/userRoutes.js";
+import { jobsRoutes } from "./routes/jobsRoutes.js";
 //rest object
 const app =express();
 
@@ -25,6 +26,8 @@ app.use(morgan( 'dev '))
 app.use('/api',testRoutes)
 app.use('/auth',authRoutes)
 app.use('/auth/user',userRoutes)
+app.use("/job",jobsRoutes)
+
 //port
 const PORT = process.env.PORT || 5000;
 //validation middleware
