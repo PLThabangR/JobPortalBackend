@@ -11,12 +11,18 @@ import { authRoutes } from "./routes/authRoutes.js";
 import errorMidddleware from "./middlewares/errorMiddlewares.js";
 import { userRoutes } from "./routes/userRoutes.js";
 import { jobsRoutes } from "./routes/jobsRoutes.js";
+import helmet from 'helmet';
+import xss from 'xss-clean';
+import mongoSanitize from "express-mongo-sanitize";
 //rest object
 const app =express();
 
 //Dot env 
 dotenv.config();
-//Middleware
+//Middleware for security
+
+
+//Other Middleware
 app.use(express.json())
 app.use(cors());
 app.use(morgan( 'dev '))
